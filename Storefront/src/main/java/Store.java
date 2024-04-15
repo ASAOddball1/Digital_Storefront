@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Store {
@@ -37,8 +38,15 @@ public class Store {
     {
         System.out.println("To begin, please set up a bank account.");
         System.out.println("How much money should your account contain?");
-        int depositAmount = scan.nextInt();
-        myBankAccount = new BankAccount(depositAmount);
+        try { //Try to deposit defined money value
+            int depositAmount = scan.nextInt();
+            myBankAccount = new BankAccount(depositAmount);
+        } catch (InputMismatchException e) { // Catch Incorrect Value (ex. A string And Not An Int)
+            //returns you to deposit menu if found
+            System.out.println("Invalid input. Please enter a number.");
+            scan.nextLine();
+            setupBankAccount();
+        }
     }
     
     private void presentShoppingMenu()
@@ -55,7 +63,8 @@ public class Store {
             System.out.println("5. View the status of your financials");
             System.out.println("6. YOUR CUSTOM IDEA HERE??");
             System.out.println("7. Exit program");
-            
+
+
             int input = scan.nextInt();
             scan.nextLine(); // buffer clear
             
@@ -80,13 +89,13 @@ public class Store {
                     break;
                 case 7:
                     System.out.println("Thanks for shopping! Now exiting program ... ");
-                    System.exit(0);                    
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Incorrect input. Choose again!");
                     break;
             }
-            
+
         }
     }
     
@@ -252,21 +261,21 @@ public class Store {
         storeInventory.restockItemToInventory(item);
         myShoppingCart.remove(item);
     }
-    
 
-    private void makePurchaseFromStore(Buyable item)
-    {
-        // If you can afford the item, buy it and remove it from the store
-        if(myBankAccount.canAfford(item.getPrice()))
-        {
-            myBankAccount.makePurchase(item.getPrice());
-            System.out.println("Purchase complete! You now own " + item.getItemName());
-            myStuff.add(item);
-            storeInventory.removeItemFromInventory(item);
-        }
-        else
-        {
-            System.out.println("You can't afford that item ... ");
+
+    private void makePurchaseFromStore(Buyable item) {
+
+        try {
+            if (myBankAccount.canAfford(item.getPrice())) {
+                myBankAccount.makePurchase(item.getPrice());
+                System.out.println("Purchase complete! You now own " + item.getItemName());
+                myStuff.add(item);
+                storeInventory.removeItemFromInventory(item);
+            } else {
+                System.out.println("You can't afford that item ... ");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing your purchase. Please try again.");
         }
     }
     

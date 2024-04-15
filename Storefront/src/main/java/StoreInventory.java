@@ -6,12 +6,14 @@ public class StoreInventory {
     private ArrayList<BuyableClothing> clothesForSale = new ArrayList<BuyableClothing>();
     private ArrayList<BuyableFood> foodForSale = new ArrayList<BuyableFood>();
     private ArrayList<BuyableGame> gamesForSale = new ArrayList<BuyableGame>();
+    private ArrayList<BuyableDevices> deviceForSale = new ArrayList<>();
     
     public StoreInventory()
     {
         populateClothesInventory();
         populateFoodInventory();
         populateGamesInventory();
+        populateDeviceInventory();
     }
     
     // Getters and setters for inventory lists
@@ -30,6 +32,8 @@ public class StoreInventory {
     {
         return gamesForSale;
     }
+
+    public ArrayList<BuyableDevices> getDeviceInventory() { return deviceForSale; }
     
     
     // Returns a master list of all inventory items at once
@@ -39,6 +43,7 @@ public class StoreInventory {
         fullInventory.addAll(clothesForSale);
         fullInventory.addAll(foodForSale);
         fullInventory.addAll(gamesForSale);
+        fullInventory.addAll(deviceForSale);
         
         return fullInventory;
     }
@@ -58,6 +63,10 @@ public class StoreInventory {
         {
             foodForSale.remove((BuyableGame)item);
         }
+        else if (item instanceof BuyableDevices)
+        {
+            deviceForSale.remove((BuyableDevices)item);
+        }
     }
     
     public void restockItemToInventory(Buyable item)
@@ -73,7 +82,11 @@ public class StoreInventory {
         else if(item instanceof BuyableGame)
         {
             foodForSale.remove((BuyableGame)item);
-        }       
+        }
+        else if (item instanceof BuyableDevices)
+        {
+            deviceForSale.add((BuyableDevices)item);
+        }
     }
     
     // Methods to populate the inventory
@@ -161,7 +174,23 @@ public class StoreInventory {
              for(int i = 0; i < numberToAdd; i++)
             {
                 gamesForSale.add((BuyableGame)item);
-            }           
+
+
+            }
+
+
         }
     }
+
+    private void populateDeviceInventory()
+    {
+        BuyableDevices IPhone13ProMax = new BuyableDevices(599.99, "IPhone 13 Pro Max", "Apple", "Phone");
+        deviceForSale.add(IPhone13ProMax);
+        BuyableDevices HPVictusGamingLaptop = new BuyableDevices(749.99, "HPVictusGamingLaptop", "HP", "Laptop");
+        deviceForSale.add(HPVictusGamingLaptop);
+        BuyableDevices ROGAlly = new BuyableDevices(899.99, "ROG Ally", "ROG", "Gaming Handheld");
+        deviceForSale.add(ROGAlly);
+        BuyableDevices LogitechG29 = new BuyableDevices(349.99, "Logitech G29 Racing Wheel", "Logitech", "Controller");
+    }
+
 }
