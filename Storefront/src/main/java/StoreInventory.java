@@ -186,11 +186,14 @@ public class StoreInventory {
     {
         BuyableDevices IPhone13ProMax = new BuyableDevices(599.99, "IPhone 13 Pro Max", "Apple", "Phone");
         deviceForSale.add(IPhone13ProMax);
-        BuyableDevices HPVictusGamingLaptop = new BuyableDevices(749.99, "HPVictusGamingLaptop", "HP", "Laptop");
+        BuyableDevices HPVictusGamingLaptop = new BuyableDevices(749.99, "HP Victus Gaming Laptop", "HP", "Laptop");
         deviceForSale.add(HPVictusGamingLaptop);
         BuyableDevices ROGAlly = new BuyableDevices(899.99, "ROG Ally", "ROG", "Gaming Handheld");
         deviceForSale.add(ROGAlly);
         BuyableDevices LogitechG29 = new BuyableDevices(349.99, "Logitech G29 Racing Wheel", "Logitech", "Controller");
+        deviceForSale.add(LogitechG29);
+        BuyableDevices ROGDesktop = new BuyableDevices(899.99, "ROG-G10DK Gaming Desktop", "ROG", "DesktopPC");
+        deviceForSale.add(ROGDesktop);
     }
 
 }

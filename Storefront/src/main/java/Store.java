@@ -8,7 +8,7 @@ public class Store {
     
     // User data variables
     private BankAccount myBankAccount;
-    private ArrayList<Buyable> myStuff;
+    public ArrayList<Buyable> myStuff;
     private ArrayList<Buyable> myShoppingCart;
     
     // Store data variables
@@ -61,7 +61,7 @@ public class Store {
             System.out.println("3. View your cart of held items");
             System.out.println("4. Review the items you already own");
             System.out.println("5. View the status of your financials");
-            System.out.println("6. YOUR CUSTOM IDEA HERE??");
+            System.out.println("6. Return Items");
             System.out.println("7. Exit program");
 
 
@@ -85,7 +85,7 @@ public class Store {
                     reviewFinancials();
                     break;
                 case 6:
-                    System.out.println("YOUR CONTENT HERE! :) :)");
+                    getBoughtItems();
                     break;
                 case 7:
                     System.out.println("Thanks for shopping! Now exiting program ... ");
@@ -166,9 +166,9 @@ public class Store {
     private void reviewMyInventory()
     {
         System.out.println("Here is a list of the items you now own: ");
-        for(int i = 0; i < myStuff.size(); i++)
+        for (Buyable buyable : myStuff)
         {
-            System.out.println("" + myStuff.get(i).getItemName());
+            System.out.println("" + buyable.getItemName());
         }
     }
     
@@ -293,5 +293,19 @@ public class Store {
         {
             System.out.println("You can't afford that item ... ");
         }        
+    }
+
+    public ArrayList<Buyable> getBoughtItems(Buyable item)
+    {
+        System.out.println("You Can Return");
+        for (Buyable buyable : myStuff)
+        {
+            System.out.println("" + buyable.getItemName());
+        }
+        int depositAmount =
+        String itemName = scan.nextLine();
+
+
+        return null;
     }
 }
