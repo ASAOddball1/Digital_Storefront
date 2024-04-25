@@ -182,6 +182,26 @@ public class StoreInventory {
         }
     }
 
+    public void addItemToStoreInventory(Buyable item)
+    {
+        if(item instanceof BuyableClothing)
+        {
+            clothesForSale.add((BuyableClothing)item);
+        }
+        else if(item instanceof BuyableFood)
+        {
+            foodForSale.add((BuyableFood)item);
+        }
+        else if(item instanceof BuyableGame)
+        {
+            gamesForSale.add((BuyableGame)item);
+        }
+        else if(item instanceof BuyableDevices)
+        {
+            deviceForSale.add((BuyableDevices)item);
+        }
+    }
+
     private void populateDeviceInventory()
     {
         BuyableDevices IPhone13ProMax = new BuyableDevices(599.99, "IPhone 13 Pro Max", "Apple", "Phone");

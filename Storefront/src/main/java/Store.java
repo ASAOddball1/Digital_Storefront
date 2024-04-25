@@ -85,7 +85,7 @@ public class Store {
                     reviewFinancials();
                     break;
                 case 6:
-                    getBoughtItems();
+                    returnPurchasedItem();
                     break;
                 case 7:
                     System.out.println("Thanks for shopping! Now exiting program ... ");
@@ -295,17 +295,56 @@ public class Store {
         }        
     }
 
-    public ArrayList<Buyable> getBoughtItems(Buyable item)
+    public void returnPurchasedItem()
     {
-        System.out.println("You Can Return");
+        System.out.println("You Can Return the following items:");
         for (Buyable buyable : myStuff)
         {
-            System.out.println("" + buyable.getItemName());
+            System.out.println(buyable.getItemName());
         }
-        int depositAmount =
+
+        System.out.println("Select an item you would like to return:");
         String itemName = scan.nextLine();
 
+        if(isItemInBoughtInventory(itemName))
+        {
+            int itemToReturn = getItemPositionInArrayList(itemName);
+            Buyable item = myStuff.get(itemToReturn);
+            double price = item.getPrice();
 
-        return null;
+            myBankAccount.depositMoney(price);
+            storeInventory.addItemToStoreInventory(item);
+            myStuff.remove(itemToReturn);
+        }
+
+        else
+        {
+            System.out.println("You do not have this item!");
+        }
+    }
+
+    private int getItemPositionInArrayList(String itemName)
+    {
+        for(int i = 0; i < myStuff.size(); i++)
+        {
+            if(myStuff.get(i).getItemName().equalsIgnoreCase(itemName))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private boolean isItemInBoughtInventory(String itemName)
+    {
+        for(Buyable item : myStuff)
+        {
+            if(item.getItemName().equalsIgnoreCase(itemName))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
