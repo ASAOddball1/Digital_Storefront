@@ -1,4 +1,6 @@
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -98,15 +100,99 @@ public class Store {
 
         }
     }
-    
+
+    private void getClothes() {
+        System.out.println("The Clothes We Have For Sale Are");
+
+        for(BuyableClothing item: storeInventory.getClothesInventory()) {
+            System.out.println(item.getItemName());
+        }
+
+    }
+
+    private void getFood() {
+        System.out.println("The Food We Have For Sale Are");
+
+        for(BuyableFood item: storeInventory.getFoodInventory()) {
+            System.out.println(item.getItemName());
+        }
+    }
+
+    private void getGames(){
+        System.out.println("The Games We Have For Sale Are");
+
+        for(BuyableGame item: storeInventory.getGamesInventory()) {
+            System.out.println(item.getItemName());
+        }
+    }
+
+    private void getDevice(){
+        System.out.println("The Device We Have For Sale Are");
+
+        for(BuyableDevices item: storeInventory.getDeviceInventory()) {
+            System.out.println(item.getItemName());
+        }
+    }
+
+    private void itemDetails(){
+
+        System.out.println("WIP");
+
+        /* System.out.println("Which item would you like to view the details of");
+
+        String itemName = scan.nextLine();
+        Buyable itemToCheck = null;
+        for(Buyable item: storeInventory.getFullInventoryList()) {
+            {
+                if(item.getItemName().toLowerCase().equals(itemName.toLowerCase()))
+                {
+                    itemToCheck = item;
+                    break;
+                }
+
+                if(itemToCheck != null)
+                {
+                    System.out.println(itemToCheck.getItemName());
+                }
+
+
+
+
+            }
+        }
+
+         */
+    }
+
+
     private void viewCatalog()
     {
         System.out.println("Here is a list of all the items currently for sale!");
-        
-        // Retrieve the master list from the store inventory and examine each entry individually
-        for(Buyable item: storeInventory.getFullInventoryList()) 
         {
-            System.out.println("" + item.getItemName());
+            System.out.println("What Category Would You Like, You have the options of: 1 Clothing, 2 Food, 3 Games, 4 Devices, Or 5 View More Details About An Item");
+
+            int Input = scan.nextInt();
+
+
+            switch(Input){
+                case 1:
+                    getClothes();
+                    break;
+                case 2:
+                    getFood();
+                    break;
+                case 3:
+                    getGames();
+                    break;
+                case 4:
+                    getDevice();
+                    break;
+                case 5:
+                    itemDetails();
+                default:
+                    System.out.println("Incorrect input. Choose again!");
+                    break;
+            }
         }
     }
     
