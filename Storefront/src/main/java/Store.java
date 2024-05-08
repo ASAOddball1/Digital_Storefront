@@ -1,4 +1,5 @@
 
+import jdk.jfr.Category;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public class Store {
     }
 
     private void getDevice(){
-        System.out.println("The Device We Have For Sale Are");
+        System.out.println("The Devices We Have For Sale Are");
 
         for(BuyableDevices item: storeInventory.getDeviceInventory()) {
             System.out.println(item.getItemName());
@@ -167,10 +168,8 @@ public class Store {
 
     private void viewCatalog()
     {
-        System.out.println("Here is a list of all the items currently for sale!");
+        System.out.println("What Category Would You Like, You have the options of: 1 Clothing, 2 Food, 3 Games, 4 Devices, Or 5 View More Details About An Item");
         {
-            System.out.println("What Category Would You Like, You have the options of: 1 Clothing, 2 Food, 3 Games, 4 Devices, Or 5 View More Details About An Item");
-
             int Input = scan.nextInt();
 
 
@@ -247,16 +246,54 @@ public class Store {
         }
         
     }
-    
+
+    private void clothesCheck(BuyableClothing clothing)
+    {
+        System.out.println("The Clothes you own are,");
+
+
+
+        for(Buyable item ){
+        item.setItemCategory();
+        }
+
+    }
+
+
+
+
 
     private void reviewMyInventory()
+
     {
-        System.out.println("Here is a list of the items you now own: ");
-        for (Buyable buyable : myStuff)
-        {
-            System.out.println("" + buyable.getItemName());
+        System.out.println("Which kind of item would you like to see if is in your inventory, (1. Clothing, 2. Food, 3. Games, 4. Devices)");
+
+        int Input = scan.nextInt();
+
+        switch(Input){
+            case 1:
+                clothesCheck();
+                break;
+            case 2:
+                System.out.println("WIP");
+                break;
+            case 3:
+                System.out.println("WIP");
+                break;
+            case 4:
+                System.out.println("WIP");
+            default:
+                System.out.println("Incorrect input. Choose again!");
+                break;
+
         }
     }
+
+        /*for (Buyable buyable : myStuff)
+        {
+            System.out.println("" + buyable.getItemName());
+        }*/
+
     
     private void reviewFinancials()
     {
