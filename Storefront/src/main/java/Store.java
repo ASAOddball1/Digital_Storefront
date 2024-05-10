@@ -153,35 +153,53 @@ public class Store {
         }
     }
 
-    private void itemDetails(){
+    private void itemDetails() {
 
-        System.out.println("WIP");
-
-        /* System.out.println("Which item would you like to view the details of");
+        System.out.println("Which Item Would You Like To Check");
 
         String itemName = scan.nextLine();
+
         Buyable itemToCheck = null;
-        for(Buyable item: storeInventory.getFullInventoryList()) {
-            {
-                if(item.getItemName().toLowerCase().equals(itemName.toLowerCase()))
-                {
-                    itemToCheck = item;
-                    break;
-                }
 
-                if(itemToCheck != null)
-                {
-                    System.out.println(itemToCheck.getItemName());
-                }
-
-
-
-
+        for (Buyable item : storeInventory.getFullInventoryList()) {
+            if (item.getItemName().toLowerCase().equals(itemName.toLowerCase())) {
+                itemToCheck = item;
+                break;
             }
         }
 
-         */
+        if (itemToCheck != null) {
+            System.out.println("We have found the item " + itemToCheck.getItemName());
+            System.out.println(itemToCheck.getItemName() + " Is in the Category " + itemToCheck.getItemCategory() + " And costs " + itemToCheck.getPrice());
+            System.out.println("Do you wish to purchase " + itemToCheck.getItemName() + "(1. Buy Item 2. Add item to cart, or 3. Return to Main Menu");
+
+            int input = scan.nextInt();
+            scan.nextLine(); // buffer clear
+
+            if(input == 1)
+            {
+                makePurchaseFromStore(itemToCheck);
+            }
+            else if(input == 2)
+            {
+                System.out.println("We'll hold onto this item for you.");
+                moveItemToShoppingCart(itemToCheck);
+            }
+            else if (input == 3)
+            {
+                System.out.println("Returning to Main Menu");
+            }
+            else{
+                System.out.println("Incorrect input. Purchase cancelled Returning To Main Menu");
+            }
+
+        }else {
+            System.out.println("Item not found. Returning to menu");
+        }
+
     }
+
+
 
 
     private void viewCatalog()
@@ -189,6 +207,7 @@ public class Store {
         System.out.println("What Category Would You Like, You have the options of: 1 Clothing, 2 Food, 3 Games, 4 Devices, Or 5 View More Details About An Item");
         {
             int Input = scan.nextInt();
+            scan.nextLine(); // buffer clear
 
 
             switch(Input){
@@ -206,6 +225,7 @@ public class Store {
                     break;
                 case 5:
                     itemDetails();
+                    break;
                 default:
                     System.out.println("Incorrect input. Choose again!");
                     break;
