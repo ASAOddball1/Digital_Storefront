@@ -13,7 +13,10 @@ public class Store {
     private BankAccount myBankAccount;
     public ArrayList<Buyable> myStuff;
     private ArrayList<Buyable> myShoppingCart;
-    
+
+    public ArrayList<Buyable> purchaseHistory;
+
+
     // Store data variables
     private StoreInventory storeInventory;
     
@@ -30,6 +33,7 @@ public class Store {
         setupBankAccount();
         myStuff = new ArrayList<Buyable>();
         myShoppingCart = new ArrayList<Buyable>();
+        purchaseHistory = new ArrayList<Buyable>();
     }
     
     private void setupStore()
@@ -65,7 +69,8 @@ public class Store {
             System.out.println("4. Review the items you already own");
             System.out.println("5. View the status of your financials");
             System.out.println("6. Return Items");
-            System.out.println("7. Exit program");
+            System.out.println("7. Store Purchase History");
+            System.out.println("8. Exit program");
 
 
             int input = scan.nextInt();
@@ -91,6 +96,9 @@ public class Store {
                     returnPurchasedItem();
                     break;
                 case 7:
+                    getPurchaseHistory();
+                    break;
+                case 8:
                     System.out.println("Thanks for shopping! Now exiting program ... ");
                     System.exit(0);
                     break;
@@ -99,6 +107,16 @@ public class Store {
                     break;
             }
 
+        }
+    }
+
+    private void getPurchaseHistory(){
+
+        System.out.println("The Items that have ever been bought from the store are. ");
+        
+        for (Buyable item : purchaseHistory){
+
+            System.out.println(item.getItemName() + " " + item.getPrice());
         }
     }
 
@@ -247,14 +265,62 @@ public class Store {
         
     }
 
-    private void clothesCheck(BuyableClothing clothing)
+    private void clothesCheck()
     {
         System.out.println("The Clothes you own are,");
 
+        for (Buyable item : myStuff){
+            if (item instanceof BuyableClothing){
+                System.out.println(item.getItemName());
+            }
+            else{
+                System.out.println("You dont own any clothes yet");
+            }
+        }
 
+    }
 
-        for(Buyable item ){
-        item.setItemCategory();
+    private void foodCheck()
+    {
+        System.out.println("The Food Items you own are,");
+
+        for (Buyable item : myStuff){
+            if (item instanceof BuyableFood){
+                System.out.println(item.getItemName());
+            }
+            else{
+                System.out.println("You don't have any food yet");
+            }
+        }
+
+    }
+
+    private void gameCheck()
+    {
+        System.out.println("The Games you own are,");
+
+        for (Buyable item : myStuff){
+            if (item instanceof BuyableGame){
+                System.out.println(item.getItemName());
+            }
+            else{
+                System.out.println("You don't have any games yet");
+            }
+        }
+
+    }
+
+    private void deviceCheck()
+    {
+        System.out.println("The Devices you own are,");
+
+        for (Buyable item : myStuff){
+            if (item instanceof BuyableDevices){
+                System.out.println(item.getItemName());
+            }
+            else{
+                System.out.println("You don't have a device yet.");
+            }
         }
 
     }
@@ -275,13 +341,14 @@ public class Store {
                 clothesCheck();
                 break;
             case 2:
-                System.out.println("WIP");
+                foodCheck();
                 break;
             case 3:
-                System.out.println("WIP");
+                gameCheck();
                 break;
             case 4:
-                System.out.println("WIP");
+                deviceCheck();
+                break;
             default:
                 System.out.println("Incorrect input. Choose again!");
                 break;
@@ -393,6 +460,7 @@ public class Store {
                 myBankAccount.makePurchase(item.getPrice());
                 System.out.println("Purchase complete! You now own " + item.getItemName());
                 myStuff.add(item);
+                purchaseHistory.add(item);
                 storeInventory.removeItemFromInventory(item);
             } else {
                 System.out.println("You can't afford that item ... ");
@@ -410,6 +478,7 @@ public class Store {
             myBankAccount.makePurchase(item.getPrice());
             System.out.println("Purchase complete! You now own " + item.getItemName());
             myStuff.add(item);
+            purchaseHistory.add(item);
             myShoppingCart.remove(item);
         }
         else
